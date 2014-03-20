@@ -27,13 +27,24 @@
 			background-color: #e7e7e7;
 		}
 	</style>
+	<script>
+	function onBtnAddTaskClick(){
+		var task = document.getElementById("txtTask").value;
+		var newTask = "<li>" + task + "</li>";
+		document.getElementById("ulTaskList").innerHTML += newTask;
+	}
+	function init(){
+		document.getElementById("btnAddTask").addEventListener("click",onBtnAddTaskClick);
+	}
+	window.addEventListener("DOMContentLoaded",init);
+	</script>
 </head>
 <body>
 	<h1>Task Manager</h1>
 	<div id="content">
 		<span>Task :</span>
 		<input type="text" name="" id="txtTask">
-		<input type="button" value="Add Task" id="btnAddTask">
+		<input type="button" value="Add Task" id="btnAddTask" >
 		<input type="button" value="Remove Completed" id="btnRemoveCompleted">
 		<ul id="ulTaskList">
 			<li>Task - 1</li>
