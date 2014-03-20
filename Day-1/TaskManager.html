@@ -3,8 +3,44 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Task Manager</title>
+	<style>
+		h1 {
+			border-top: 2px solid blue;
+			border-bottom: 2px solid blue;
+			background-color: lightblue;
+			padding : 15px;
+			margin-top : 0px;
+		}
+		.completed {
+			color : red;
+			font-style: italice;
+			text-decoration: line-through;
+		}
+		ul{
+			width: 300px;
+		}
+		li{
+			list-style: none;
+			margin: 5px;
+			padding: 3px;
+			border : 1px solid gray;
+			background-color: #e7e7e7;
+		}
+	</style>
 </head>
 <body>
-	
+	<h1>Task Manager</h1>
+	<div id="content">
+		<span>Task :</span>
+		<input type="text" name="" id="txtTask">
+		<input type="button" value="Add Task" id="btnAddTask">
+		<input type="button" value="Remove Completed" id="btnRemoveCompleted">
+		<ul id="ulTaskList">
+			<li>Task - 1</li>
+			<li class="completed">Task - 2</li>
+			<li>Task - 3</li>
+		</ul>
+		<div id="divMessage">[Messages will be displayed here]</div>
+	</div>
 </body>
 </html>
