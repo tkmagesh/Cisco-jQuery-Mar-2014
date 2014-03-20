@@ -13,7 +13,21 @@
 	}
 	</style>
 	<script type="text/javascript">
-		
+		function init(){
+			 $("#btnGreet").attr("disabled",true);
+			 $("#txtFirstName, #txtLastName").change(function(){
+			 	var shouldBeDisabled = $("#txtFirstName").val() === "" || $("#txtLastName").val() === "";
+			 	$("#btnGreet").attr("disabled",shouldBeDisabled);
+			 });
+			 $("#btnGreet").click(function(){
+			 	var greetMsg = "Hi " + $("#txtFirstName").val() + " " + $("#txtLastName").val() + ", ";
+			 	var currentHour = new Date().getHours();
+			 	greetMsg += currentHour > 12 ? "Good Afternoon!!" : "Good Morning!!";
+			 	$("#divMessage").html(greetMsg);
+			 	$("#divMessage").css("color",currentHour > 12 ? "red" : "green");
+			 });
+		}
+		$(document).ready(init);
 	</script>
 </head>
 <body>
