@@ -13,7 +13,7 @@
 		}
 		.completed {
 			color : red;
-			font-style: italice;
+			font-style: italic;
 			text-decoration: line-through;
 		}
 		ul{
@@ -31,40 +31,34 @@
 	<script src="jquery-1.11.0.js"></script>
 	<script>
 	(function (){
-		var taskCount = 0;
 		function onBtnAddTaskClick(){
-			var task = document.getElementById("txtTask").value;
-			var newTask = document.createElement("li");
-			newTask.innerText = task;
-			newTask.addEventListener("click",onTaskItemClick);
-			document.getElementById("ulTaskList").appendChild(newTask);
-			++taskCount;
-			displayMessage(taskCount + " tasks are added till now!");
+			$("<li></li>")
+				.text($("#txtTask").val())
+				//Taking advantage of event bubbling
+				//.click(onTaskItemClick)
+				.appendTo("#ulTaskList");
+			displayMessage("A new task is added");
 		}
 		function displayMessage(msg){
-			document.getElementById("divMessage").innerHTML = msg;
+			$("#divMessage").html(msg);
 		}
-		function init(){
-			document.getElementById("btnAddTask").addEventListener("click",onBtnAddTaskClick);
-			document.getElementById("btnRemoveCompleted").addEventListener("click",onBtnRemoveCompletedClick);
-			var taskItems = document.getElementById("ulTaskList").children;
-			for(var i=0;i<taskItems.length;i++)
-				taskItems[i].addEventListener("click",onTaskItemClick);
-		}
+		$(function(){
+			//$("#btnAddTask").click(onBtnAddTaskClick);
+			$("#btnAddTask").on("click", onBtnAddTaskClick);
+
+			$("#btnRemoveCompleted").click(onBtnRemoveCompletedClick);
+			//$("#ulTaskList > li").click(onTaskItemClick);
+			//Taking advantage of Event Bubbling
+			//$("#ulTaskList").delegate("li","click",onTaskItemClick);
+			$("#ulTaskList").on("click","li",onTaskItemClick);
+		});
+
 		function onBtnRemoveCompletedClick(){
-			var taskItems = document.getElementById("ulTaskList").children;
-			for(var i=taskItems.length-1;i>=0;i--)
-				if (taskItems[i].classList.contains("completed"))
-					taskItems[i].remove();
+			$("#ulTaskList > li.completed").remove();
 		}
 		function onTaskItemClick(){
-			if (this.classList.contains("completed")){
-				this.classList.remove("completed");
-			} else {
-				this.classList.add("completed");
-			}
+			$(this).toggleClass("completed");
 		}
-		window.addEventListener("DOMContentLoaded",init);
 	})();
 	
 	</script>
@@ -77,7 +71,8 @@
 		<input type="button" value="Add Task" id="btnAddTask" >
 		<input type="button" value="Remove Completed" id="btnRemoveCompleted">
 		<ul id="ulTaskList">
-			
+			<li>Task - 1</li>
+			<li>Task - 2</li>
 		</ul>
 		<div id="divMessage">[Messages will be displayed here]</div>
 	</div>

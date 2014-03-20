@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" id="html">
+<head>
+	<meta charset="UTF-8">
+	<title>Event Bubbling Demo</title>
+	<script src="jquery-1.11.0.js"></script>
+	<script>
+	window.addEventListener("DOMContentLoaded",function(){
+		
+		//document.getElementById("first").addEventListener("click",whoAmI);
+		//The jquery version of the above line is:-
+		$("#first").delegate("span.selected","click",function(){
+			$(this).remove();
+		});
+		/*document.getElementById("second").addEventListener("click",whoAmI);
+		document.getElementById("third").addEventListener("click",whoAmI);
+		document.getElementById("body").addEventListener("click",whoAmI);
+		document.getElementById("html").addEventListener("click",whoAmI);
+		document.getElementById("spanText").addEventListener("click",whoAmI);
+		*/
+	})
+	function whoAmI(evtObj){
+		if (evtObj.srcElement.nodeName === "SPAN"){
+			evtObj.srcElement.remove();
+		}
+	}
+	</script>
+	<style>
+	div, #spanText{
+		padding : 20px;
+		margin: 10px;
+		border-width: 2px;
+		border-style: solid;
+	}
+	#first{
+		border-color: red;
+		background-color: lightpink;
+	}
+	#second{
+		border-color: blue;
+		background-color: lightblue;
+	}
+	#third{
+		border-color: green;
+		background-color: green;
+	}
+	#spanText{
+		border-color: yellow;
+		background-color: lightyellow;
+	}
+	.selected{
+		color : red;
+		font-weight: bold;
+	}
+	</style>
+</head>
+<body id="body">
+	<div id="first">
+		<div id="second">
+			<div id="third">
+				<span id="spanText" class="selected">This is a sample text 1</span>
+				<span id="spanText">This is a sample text 2</span>
+				<span id="spanText" class="selected">This is a sample text 3</span>
+				<span id="spanText">This is a sample text 4</span>
+				<span id="spanText" class="selected">This is a sample text 5</span>
+				<span id="spanText">This is a sample text 6</span>
+				<span id="spanText" class="selected">This is a sample text 7</span>
+				<span id="spanText" class="selected">This is a sample text 8</span>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
