@@ -4,16 +4,46 @@
 	<meta charset="UTF-8">
 	<title>Ajax Demo</title>
 	<script src="jquery-1.11.0.js"></script>
+	<script src="handlebars.js"></script>
+	<script type="text/x-handlebars-template" id="productsTemplate">
+		<table>
+		<tr>
+			<th>Id </th>
+			<th>Name </th>
+			<th>Cost</th>
+			<th>Units</th>
+		</tr>
+		{{#each products}}
+		<tr>
+			<td>{{id}}</td>
+			<td>{{name}}</td>
+			<td>{{cost}}</td>
+			<td>{{units}}</td>
+		</tr>
+		{{/each}}
+	</table>
+	</script>
 	<script type="text/javascript">
 	$(function(){
+		var source   = $("#productsTemplate").html();
+		var template = Handlebars.compile(source);
+		
 		$("#btnGetHtml").click(function(){
 			$.get("partialHTML.html",undefined,function(data){
 				$(document.body).append(data);
 			});
 			//$(document.body).append()
 		});
+		
 		$("#btnLoadHTML").click(function(){
 			$("#content").load("partialHTML.html");
+		});
+		
+		$("#btnLoadProducts").click(function(){
+			$.getJSON("products.json",function(data){
+				
+				$("#content").append(template(data));
+			});
 		});
 	});
 	</script>
@@ -25,5 +55,6 @@
 	<br>
 	<input type="button" value="Load Products" id="btnLoadProducts">
 	<div id="content"></div>
+	
 </body>
 </html>
