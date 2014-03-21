@@ -12,15 +12,32 @@
 		function onBtnFadeoutClick(){
 			var h1 = document.getElementById("eleToFadeOut");
 			displayMessage("fadeOut started...");
-			fadeOut(h1, 5000);
-			displayMessage("fadeOut completed...");
+			fadeOut(h1,5000);
+			displayMessage("fadeOut completed..!");
+			
+			/*fadeOut(h1, 5000, function(){
+				displayMessage("fadeOut completed...");	
+			});*/
+			
 		}
 		function displayMessage(msg){
 			document.getElementById("divMessage").innerHTML += msg+ "<br/>";
 		}
 
-		function fadeOut(ele,duration){
-			
+		function fadeOut(ele,duration, onCompletion){
+			var currOpacity = 1;
+			function oneIteration(){
+				ele.style.opacity = currOpacity;
+				currOpacity -= 0.05;
+				if (currOpacity < 0){
+					ele.style.opacity = 0;
+					ele.style.display = "none";
+					onCompletion();
+				} else {
+					setTimeout(oneIteration,250);
+				}
+			}
+			oneIteration();
 		}
 	})();
 	</script>
