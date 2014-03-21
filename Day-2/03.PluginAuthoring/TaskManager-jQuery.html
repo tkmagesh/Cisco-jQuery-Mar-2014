@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Task Manager</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="jquery-1.11.0.js"></script>
+	<script>
+	(function (){
+		function onBtnAddTaskClick(){
+			var taskName = $("#txtTask").val();
+			$("<li></li>")
+				.text(taskName)
+				.hide()
+				.prependTo("#ulTaskList")
+				.slideDown();
+			displayMessage(taskName + " - is added");
+		}
+		function displayMessage(msg){
+			var html = "<div class='message'>{0}<br/><a href='#'>Close</a></div>".replace("{0}",msg);
+			$(html)
+				.hide()
+				.appendTo("#divMessage")
+				.find("a").click(function(){
+					$(this).parent('div').remove();
+				 })
+				.end()
+				.slideDown()
+				.delay(3000)
+				.fadeOut();
+		}
+		$(function(){
+			$("#btnAddTask").on("click", onBtnAddTaskClick);
+			$("#btnRemoveCompleted").click(onBtnRemoveCompletedClick);
+			$("#ulTaskList").on("click","li",onTaskItemClick);
+			var hintText = "[Enter the task]";
+
+			var events= {
+				
+				focus : function(){
+						var $this = $(this);
+						$this.addClass("focused");
+						if ($this.val() === hintText){
+							$this.val('').removeClass("hint");
+						}
+
+				},
+				blur : function(){
+					var $this = $(this);
+					if ($this.val() === ''){
+						$this.val(hintText).addClass("hint");
+					}
+					$(this).removeClass("focused");
+				}
+			};
+			$("#txtTask").bind(events).val(hintText).addClass("hint");
+			//$("#divMessage").hide();
+		});
+
+		function onBtnRemoveCompletedClick(){
+			$("#ulTaskList > li.completed").fadeOut(400,function(){
+				$(this).remove();
+			});
+			displayMessage("0 or more completed tasks are removed");
+		}
+		function onTaskItemClick(){
+			$(this).toggleClass("completed");
+		}
+	})();
+	
+	</script>
+</head>
+<body>
+	<h1>Task Manager</h1>
+	<div id="content">
+		<span>Task :</span>
+		<input type="text" name="" id="txtTask">
+
+		<input type="button" value="Add Task" id="btnAddTask" >
+		<input type="button" value="Remove Completed" id="btnRemoveCompleted">
+		<br>
+		<span id="letterCount">[letter]</span>
+		<ul id="ulTaskList">
+			<li>Task - 1</li>
+			<li>Task - 2</li>
+		</ul>
+		<div id="divMessage"></div>
+	</div>
+</body>
+</html>

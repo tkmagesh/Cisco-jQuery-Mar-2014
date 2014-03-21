@@ -40,10 +40,18 @@
 		});
 		
 		$("#btnLoadProducts").click(function(){
-			$.getJSON("products.json",function(data){
-				
+			/*$.getJSON("products.json",function(data){
 				$("#content").append(template(data));
+			});*/
+			$.ajax({
+				url : "products.json",
+				type : "get",
+				dataType : "json",
+				success : function(data){
+					$("#content").append(template(data));	
+				}
 			});
+
 		});
 	});
 	</script>

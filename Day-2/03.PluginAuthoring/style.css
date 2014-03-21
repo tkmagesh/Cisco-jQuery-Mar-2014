@@ -1,0 +1,44 @@
+h1 {
+			border-top: 2px solid blue;
+			border-bottom: 2px solid blue;
+			background-color: lightblue;
+			padding : 15px;
+			margin-top : 0px;
+		}
+		.completed {
+			color : red;
+			font-style: italic;
+			text-decoration: line-through;
+		}
+		ul{
+			width: 300px;
+		}
+		li{
+			cursor: pointer;
+			list-style: none;
+			margin: 5px;
+			padding: 3px;
+			border : 1px solid gray;
+			background-color: #e7e7e7;
+		}
+		.focused{
+			border : 1px solid red;
+			background : -webkit-linear-gradient(top, red -25%, #FFF 25%);
+		}
+		#divMessage{
+			position: absolute;
+			bottom: 0px;
+			right: 0px;
+			
+		}
+		.message{
+			padding: 10px;
+			border : 2px solid gray;
+			background-color: #efefef;
+			border-radius: 5px;
+			margin: 5px;
+		}
+	.hint{
+		color : gray;
+		font-style: italic;
+	}
