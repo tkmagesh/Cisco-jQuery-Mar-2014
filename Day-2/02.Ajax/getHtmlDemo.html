@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ajax Demo</title>
+	<script src="jquery-1.11.0.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$("#btnGetHtml").click(function(){
+			$.get("partialHTML.html",undefined,function(data){
+				$(document.body).append(data);
+			});
+			//$(document.body).append()
+		});
+		$("#btnLoadHTML").click(function(){
+			$("#content").load("partialHTML.html");
+		});
+	});
+	</script>
+</head>
+<body>
+	<input type="button" value="GET HTML" id="btnGetHtml">
+	<br>
+	<input type="button" value="Load HTML" id="btnLoadHTML">
+	<br>
+	<input type="button" value="Load Products" id="btnLoadProducts">
+	<div id="content"></div>
+</body>
+</html>
