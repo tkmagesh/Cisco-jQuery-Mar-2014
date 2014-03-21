@@ -73,7 +73,7 @@
 		});
 
 		function onBtnRemoveCompletedClick(){
-			$("#ulTaskList > li.completed").remove();
+			$("#ulTaskList > li.completed").fadeOut(5000);
 		}
 		function onTaskItemClick(){
 			$(this).toggleClass("completed");

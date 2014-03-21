@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Custom Fadeout Implementation</title>
+	<script type="text/javascript">
+	(function(){
+		window.addEventListener("DOMContentLoaded",init);
+		function init(){
+			document.getElementById("btnFadeout").addEventListener("click",onBtnFadeoutClick);
+		}
+		function onBtnFadeoutClick(){
+			var h1 = document.getElementById("eleToFadeOut");
+			displayMessage("fadeOut started...");
+			fadeOut(h1, 5000);
+			displayMessage("fadeOut completed...");
+		}
+		function displayMessage(msg){
+			document.getElementById("divMessage").innerHTML += msg+ "<br/>";
+		}
+
+		function fadeOut(ele,duration){
+			
+		}
+	})();
+	</script>
+</head>
+<body>
+	<h1 id="eleToFadeOut">Cisco</h1>
+	<input type="button" value="FadeOut" id="btnFadeout">
+	<div id="divMessage">
+		
+	</div>
+</body>
+</html>
